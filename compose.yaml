@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  postgres:
+    image: 'postgres:latest'
+    container_name: postgres
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: ravnTest
+  java:
+    image: douglascamposh/ravn
+    container_name: ravn
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+    depends_on:
+      - postgres
+    ports:
+      - 8080:8080
+
